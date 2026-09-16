@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salah Eddine Hirech — Data Scientist / IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1B1D;
+    --bg-raised: #172627;
+    --bg-raised-2: #1C2E2F;
+    --text: #EAEFE9;
+    --text-muted: #93A6A1;
+    --text-faint: #5E706C;
+    --accent: #E8B04B;
+    --accent-soft: rgba(232,176,75,0.14);
+    --accent-2: #5AAE96;
+    --line: #2A3E3E;
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg: #F7F5EF;
+      --bg-raised: #FFFFFF;
+      --bg-raised-2: #EFEBE0;
+      --text: #16211F;
+      --text-muted: #57645F;
+      --text-faint: #97A19C;
+      --accent: #B9791E;
+      --accent-soft: rgba(185,121,30,0.10);
+      --accent-2: #2E7A64;
+      --line: #DDD7C6;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F5EF;
+    --bg-raised: #FFFFFF;
+    --bg-raised-2: #EFEBE0;
+    --text: #16211F;
+    --text-muted: #57645F;
+    --text-faint: #97A19C;
+    --accent: #B9791E;
+    --accent-soft: rgba(185,121,30,0.10);
+    --accent-2: #2E7A64;
+    --line: #DDD7C6;
+  }
+  :root[data-theme="dark"]{
+    --bg: #0F1B1D;
+    --bg-raised: #172627;
+    --bg-raised-2: #1C2E2F;
+    --text: #EAEFE9;
+    --text-muted: #93A6A1;
+    --text-faint: #5E706C;
+    --accent: #E8B04B;
+    --accent-soft: rgba(232,176,75,0.14);
+    --accent-2: #5AAE96;
+    --line: #2A3E3E;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- Top nav ---------- */
+  .topbar{
+    position: sticky; top:0; z-index: 20;
+    backdrop-filter: blur(8px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width: 880px; margin:0 auto; padding: 16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ font-family: var(--serif); font-size: 1.05rem; letter-spacing: 0.01em; }
+  .navlinks{ display:flex; gap: 22px; font-size: 0.88rem; color: var(--text-muted); }
+  .navlinks a{ text-decoration:none; }
+  .navlinks a:hover{ color: var(--accent); }
+  .theme-toggle{
+    border:1px solid var(--line); background: transparent; color: var(--text-muted);
+    border-radius: 999px; width: 30px; height: 30px; cursor: pointer;
+    display:flex; align-items:center; justify-content:center; font-size: 0.85rem;
+  }
+  .theme-toggle:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 88px 0 60px; position: relative; overflow: hidden; }
+  .hero-grid{
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 42px;
+    opacity: 0.35;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+  .kicker{
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent-2);
+    margin: 0 0 18px;
+  }
+  h1.name{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.08;
+    margin: 0 0 14px;
+    max-width: 11ch;
+  }
+  .role{
+    font-size: 1.15rem; color: var(--text-muted); max-width: 46ch; margin: 0 0 30px;
+  }
+  .role em{ font-style: normal; color: var(--text); border-bottom: 1px solid var(--accent); }
+
+  .contact-row{
+    display:flex; flex-wrap: wrap; gap: 10px 22px; font-family: var(--mono); font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+  .contact-row a{ text-decoration: none; }
+  .contact-row a:hover{ color: var(--accent); }
+  .contact-row span.sep{ color: var(--text-faint); }
+
+  .hero-spark{
+    margin-top: 52px; display:flex; gap: 46px; flex-wrap: wrap;
+  }
+  .spark-item{ min-width: 120px; }
+  .spark-num{ font-family: var(--serif); font-size: 2rem; color: var(--accent); line-height: 1; }
+  .spark-label{ font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--line); }
+  .section-head{
+    display:flex; align-items: baseline; justify-content: space-between; margin-bottom: 34px;
+    gap: 16px; flex-wrap: wrap;
+  }
+  h2.section-title{
+    font-family: var(--serif); font-weight: 500; font-size: 1.5rem; margin:0;
+  }
+  .section-note{ font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); }
+
+  p.lede{ max-width: 62ch; color: var(--text-muted); font-size: 1.02rem; }
+
+  /* ---------- Timeline (experience) ---------- */
+  .timeline{ position: relative; }
+  .tl-item{
+    display:grid; grid-template-columns: 130px 1fr; gap: 24px;
+    padding: 26px 0; border-top: 1px solid var(--line);
+  }
+  .tl-item:first-child{ border-top:none; }
+  .tl-date{ font-family: var(--mono); font-size: 0.78rem; color: var(--accent-2); padding-top: 3px; }
+  .tl-role{ font-family: var(--serif); font-size: 1.18rem; margin: 0 0 3px; }
+  .tl-org{ font-size: 0.92rem; color: var(--text-muted); margin: 0 0 14px; }
+  .tl-desc{ margin:0; padding-left: 18px; color: var(--text-muted); font-size: 0.95rem; }
+  .tl-desc li{ margin-bottom: 7px; }
+  .tl-desc li::marker{ color: var(--accent); }
+
+  /* ---------- Projects ---------- */
+  .proj-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .proj-card{ background: var(--bg); padding: 26px; }
+  .proj-tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--accent); margin-bottom: 12px; display:block; }
+  .proj-title{ font-family: var(--serif); font-size: 1.12rem; margin: 0 0 10px; }
+  .proj-desc{ color: var(--text-muted); font-size: 0.92rem; margin: 0 0 14px; }
+  .proj-tools{ font-family: var(--mono); font-size: 0.76rem; color: var(--text-faint); }
+
+  /* ---------- Skills ---------- */
+  .skill-groups{ display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px 26px; }
+  .skill-group-name{ font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); margin-bottom: 12px; }
+  .skill-list{ display:flex; flex-wrap: wrap; gap: 8px 10px; }
+  .skill-chip{
+    font-size: 0.86rem; padding: 5px 0; color: var(--text);
+    border-bottom: 1px dotted var(--line);
+  }
+  .skill-list{ flex-direction: column; gap: 2px; }
+
+  /* ---------- Education ---------- */
+  .edu-item{ display:grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 20px 0; border-top: 1px solid var(--line); }
+  .edu-item:first-child{ border-top:none; }
+  .edu-date{ font-family: var(--mono); font-size: 0.78rem; color: var(--accent-2); padding-top:3px; }
+  .edu-name{ font-family: var(--serif); font-size: 1.08rem; margin:0 0 3px; }
+  .edu-school{ font-size: 0.92rem; color: var(--text-muted); margin:0; }
+
+  .langs{ display:flex; gap: 36px; margin-top: 6px; flex-wrap: wrap; }
+  .lang-item .lang-name{ font-size: 0.95rem; margin-bottom: 4px; }
+  .lang-item .lang-level{ font-family: var(--mono); font-size: 0.76rem; color: var(--accent-2); }
+
+  /* ---------- Footer / contact ---------- */
+  footer{ padding: 56px 0 70px; border-top: 1px solid var(--line); }
+  .cta-title{ font-family: var(--serif); font-size: 1.7rem; margin: 0 0 18px; max-width: 20ch; }
+  .cta-links{ display:flex; flex-wrap: wrap; gap: 14px 28px; }
+  .cta-link{
+    display:inline-flex; align-items:center; gap: 8px;
+    text-decoration:none; font-size: 0.95rem; color: var(--text);
+    border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+  }
+  .cta-link:hover{ color: var(--accent); }
+  .foot-note{ margin-top: 46px; font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); }
+
+  @media (max-width: 600px){
+    .tl-item, .edu-item{ grid-template-columns: 1fr; gap: 6px; }
+    .navlinks{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Salah&nbsp;Eddine&nbsp;Hirech</div>
+    <div class="navlinks">
+      <a href="#experience">Expérience</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#formation">Formation</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" title="Changer le thème">◐</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker">Portfolio — Data Science &amp; Intelligence Artificielle</p>
+    <h1 class="name">Salah Eddine<br>Hirech</h1>
+    <p class="role">Étudiant en Master <em>Data Science &amp; IA</em> à l'EPSI Lyon, diplômé Ingénieur en Information Numérique de l'ESI Rabat. Trois stages en data science, de la fiscalité à l'industrie.</p>
+    <div class="contact-row">
+      <a href="mailto:salaheddinehirech@gmail.com">salaheddinehirech@gmail.com</a>
+      <span class="sep">·</span>
+      <a href="tel:+33637107746">+33 6 37 10 77 46</a>
+      <span class="sep">·</span>
+      <span>Lyon, France</span>
+    </div>
+    <div class="hero-spark">
+      <div class="spark-item">
+        <div class="spark-num">3</div>
+        <div class="spark-label">stages en data science</div>
+      </div>
+      <div class="spark-item">
+        <div class="spark-num">2</div>
+        <div class="spark-label">secteurs — fiscalité &amp; industrie</div>
+      </div>
+      <div class="spark-item">
+        <div class="spark-num">B2</div>
+        <div class="spark-label">français &amp; anglais</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="profil">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Profil</h2>
+    </div>
+    <p class="lede">Curieux, rigoureux et animé par une réelle passion pour la data et l'IA. Autonome et doté d'un bon esprit d'équipe, j'aime relever des défis techniques et apprendre en continu — je recherche des missions où mettre ces qualités au service de projets concrets.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Expérience professionnelle</h2>
+      <span class="section-note">2024 — en cours</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Oct. 2025 –<br>Avr. 2026</div>
+        <div>
+          <h3 class="tl-role">Stagiaire Data</h3>
+          <p class="tl-org">INGECIP, Bureau d'Étude Technique — Béni Mellal, Maroc</p>
+          <ul class="tl-desc">
+            <li>Exploration, extraction et nettoyage de données sur plusieurs jeux de données métier</li>
+            <li>Conception et automatisation de tableaux de bord Power BI pour le suivi d'indicateurs opérationnels en temps réel</li>
+            <li>Construction de pipelines ETL pour l'intégration multi-sources et le contrôle qualité des logs</li>
+            <li>Développement de modèles de prévision et d'optimisation de la tarification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Fév. –<br>Juin 2025</div>
+        <div>
+          <h3 class="tl-role">Stagiaire Data Scientist — Stage de Fin d'Études</h3>
+          <p class="tl-org">Direction Générale des Impôts (DGI) — Rabat, Maroc</p>
+          <ul class="tl-desc">
+            <li>Modèle de régression pour estimer les résultats fiscaux des entreprises à partir de données comptables, déclaratives et macroéconomiques</li>
+            <li>Système de notation de détection de fraude fiscale à partir des déclarations IS et TVA, pour prioriser le ciblage des contrôles</li>
+            <li>Analyse d'importance des variables et production de rapports analytiques restitués aux équipes métier</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Août –<br>Sept. 2024</div>
+        <div>
+          <h3 class="tl-role">Stagiaire Data Analyst — Projet de Fin d'Année</h3>
+          <p class="tl-org">Atlas Bottling Company — Tanger, Maroc</p>
+          <ul class="tl-desc">
+            <li>Pipeline ETL pour centraliser les données opérationnelles (machines, stocks, employés) issues de sources hétérogènes</li>
+            <li>Nettoyage des données avec Power Query Editor</li>
+            <li>Rapports visuels et Dashboard Power BI pour faciliter la gestion et la prise de décision</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Projets académiques</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <span class="proj-tag">BI &amp; Data Warehouse</span>
+        <h3 class="proj-title">Optimisation de la gestion hôtelière</h3>
+        <p class="proj-desc">Entrepôt de données en modélisation en étoile et processus ETL complet pour centraliser les données opérationnelles hôtelières. Tableaux de bord Power BI pour suivre le taux d'occupation et la performance par segment client.</p>
+        <span class="proj-tools">SQL Server · ETL · Power BI</span>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">Big Data</span>
+        <h3 class="proj-title">Bien-être étudiant &amp; facteurs de stress</h3>
+        <p class="proj-desc">Traitement et modélisation d'une base de données massive sous Apache Spark (Random Forest, régression logistique) pour identifier les facteurs de risque psychosociaux les plus significatifs, avec recommandations pour les institutions académiques.</p>
+        <span class="proj-tools">Apache Spark · PySpark · MLlib · Python</span>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">Computer Vision</span>
+        <h3 class="proj-title">Détection de maladies par imagerie</h3>
+        <p class="proj-desc">Système de classification d'images médicales (CNN) pour l'identification du COVID-19 à partir de radiographies pulmonaires, avec normalisation et augmentation de données pour améliorer la robustesse du modèle.</p>
+        <span class="proj-tools">Python · Traitement d'image · CNN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Compétences techniques</h2>
+    </div>
+    <div class="skill-groups">
+      <div>
+        <div class="skill-group-name">Langages</div>
+        <div class="skill-list">
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">R</span>
+          <span class="skill-chip">SQL / PL-SQL</span>
+          <span class="skill-chip">DAX · VBA</span>
+          <span class="skill-chip">Java · JavaScript</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-name">Machine Learning / IA</div>
+        <div class="skill-list">
+          <span class="skill-chip">Scikit-learn · XGBoost</span>
+          <span class="skill-chip">TensorFlow · PyTorch</span>
+          <span class="skill-chip">Random Forest</span>
+          <span class="skill-chip">Réseaux de neurones</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-name">Big Data</div>
+        <div class="skill-list">
+          <span class="skill-chip">Apache Spark · PySpark</span>
+          <span class="skill-chip">Kafka</span>
+          <span class="skill-chip">Hadoop</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-name">BI &amp; Données</div>
+        <div class="skill-list">
+          <span class="skill-chip">Power BI</span>
+          <span class="skill-chip">ETL · Airflow</span>
+          <span class="skill-chip">Data Warehouse</span>
+          <span class="skill-chip">Oracle · SQL Server · PostgreSQL · NoSQL</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-name">Cloud</div>
+        <div class="skill-list">
+          <span class="skill-chip">Azure</span>
+          <span class="skill-chip">Google Cloud</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formation">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Formation</h2>
+    </div>
+    <div class="edu-item">
+      <div class="edu-date">2026 – 2028<br>en cours</div>
+      <div>
+        <h3 class="edu-name">Cycle Master — Expert en Science des Données et IA</h3>
+        <p class="edu-school">École privée des sciences informatiques (EPSI), Lyon, France</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-date">2021 – 2025</div>
+      <div>
+        <h3 class="edu-name">Cycle Ingénieur — Ingénierie de l'Information Numérique</h3>
+        <p class="edu-school">École des Sciences de l'Information (ESI), Rabat, Maroc</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-date">2019 – 2021</div>
+      <div>
+        <h3 class="edu-name">Classes Préparatoires aux Grandes Écoles — Mathématiques &amp; Physique</h3>
+        <p class="edu-school">CPGE, Oujda, Maroc</p>
+      </div>
+    </div>
+
+    <div style="margin-top:38px;">
+      <div class="section-note" style="margin-bottom:14px;">LANGUES</div>
+      <div class="langs">
+        <div class="lang-item">
+          <div class="lang-name">Arabe</div>
+          <div class="lang-level">langue maternelle</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Français</div>
+          <div class="lang-level">courant · B2</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Anglais</div>
+          <div class="lang-level">courant · B2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h2 class="cta-title">Discutons de votre prochain projet data.</h2>
+    <div class="cta-links">
+      <a class="cta-link" href="mailto:salaheddinehirech@gmail.com">Écrire un email →</a>
+      <a class="cta-link" href="tel:+33637107746">Appeler →</a>
+    </div>
+    <p class="foot-note">Salah Eddine Hirech — Lyon, France</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    try {
+      var saved = localStorage.getItem('portfolio-theme');
+      if (saved) root.setAttribute('data-theme', saved);
+    } catch(e) {}
+    btn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current ? current === 'dark' : prefersDark;
+      var next = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('portfolio-theme', next); } catch(e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>
